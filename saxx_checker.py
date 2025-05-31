@@ -4,7 +4,7 @@ import smtplib
 from email.message import EmailMessage
 import os
 
-URL = 'https://www.saxxunderwear.com/products/sxpp3jb_bnw?variant=39910770573398'
+URL = 'https://www.saxxunderwear.com/products/sxpp3jb_bnw?variant=39910770540630'
 
 def send_email():
     msg = EmailMessage()
