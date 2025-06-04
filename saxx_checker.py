@@ -26,7 +26,7 @@ def check_stock():
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # Find the main button on the product page
-    button = soup.find('button')
+    button = soup.find('button-text')
 
     if button:
         button_text = button.text.strip().lower()
