@@ -24,20 +24,19 @@ def check_stock():
     response = requests.get(URL, headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Adjust this class to match the actual one you see in inspect
-    button = soup.find('button', class_='button-text')
+    # Look for the <span class="button-text">Out of Stock</span>
+    stock_span = soup.find('span', class_='button-text')
 
-    if button:
-        button_text = button.text.strip().lower()
-        print(f"🕵️ Button text: '{button_text}'")
+    if stock_span:
+        span_text = stock_span.text.strip().lower()
+        print(f"🕵️ Found span: '{span_text}'")
 
-        if "sold out" in button_text or "out of stock" in button_text:
+        if "out of stock" in span_text:
             print("Still sold out...")
         else:
             print("🚨 It's IN STOCK! 🚨 Sending email...")
             send_email()
     else:
-        print("⚠️ Could not find the right button. Check the class name again.")
+        print("⚠️ Could not find the stock span. Website layout may have changed.")
 
 check_stock()
-
