@@ -4,7 +4,6 @@ import smtplib
 from email.message import EmailMessage
 import os
 
-# URL of the product you want to monitor
 URL = 'https://www.saxxunderwear.com/products/sxpp3jb_bnw?variant=39910770573398'
 
 def send_email():
@@ -25,12 +24,12 @@ def check_stock():
     response = requests.get(URL, headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Find the main button on the product page
-    button = soup.find('button-text')
+    # Adjust this class to match the actual one you see in inspect
+    button = soup.find('button', class_='button-text')
 
     if button:
         button_text = button.text.strip().lower()
-        print(f"🕵️ Button says: '{button_text}'")
+        print(f"🕵️ Button text: '{button_text}'")
 
         if "sold out" in button_text or "out of stock" in button_text:
             print("Still sold out...")
@@ -38,7 +37,7 @@ def check_stock():
             print("🚨 It's IN STOCK! 🚨 Sending email...")
             send_email()
     else:
-        print("⚠️ Could not find a button on the page. Check if the site structure changed.")
+        print("⚠️ Could not find the right button. Check the class name again.")
 
-# Run it
 check_stock()
+
